@@ -1,6 +1,5 @@
 # Home Assistant Add-on: Tuya IPC Terminal
-
-!license: MIT
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Expose your Tuya-based security cameras as standard RTSP streams within your local network.
 This addon builds on the awesome work of @seydx on [Tuya IPC Terminal](https://github.com/seydx/tuya-ipc-terminal)
