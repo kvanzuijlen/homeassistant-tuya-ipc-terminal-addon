@@ -1,0 +1,27 @@
+# Home Assistant add-on configuration for Tuya IPC Terminal
+name: Tuya IPC Terminal
+version: "1.0.0"
+slug: tuya_ipc_terminal
+description: "Exposes Tuya camera streams as RTSP feeds"
+arch:
+  - aarch64
+  - amd64
+  - armhf
+  - armv7
+  - i386
+init: false
+startup: "application"
+boot: "auto"
+options:
+  TUYA_EMAIL: ""
+  TUYA_REGION: "eu-central"
+schema:
+  TUYA_EMAIL: "email"
+  TUYA_REGION: "str"
+ports:
+  8554/tcp: 8554
+ports_description:
+  8554/tcp: "RTSP stream"
+map:
+  - type: addon_config
+    read_only: False

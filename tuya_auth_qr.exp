@@ -1,0 +1,40 @@
+#!/usr/bin/expect -f
+
+# Check if the config directory already exists.
+set config_dir "/config/.tuya-data"
+if { [file isdirectory $config_dir] } {
+    # If it exists, print a message and exit successfully.
+    puts "Skipping authentication: Configuration directory '$config_dir' already exists. To re-authenticate, delete the folder from the addon config folder."
+    exit 0
+}
+
+# If the directory does not exist, proceed with authentication.
+puts "Configuration directory not found. Proceeding with authentication..."
+
+# Set a timeout for the expect command to wait for a response.
+set timeout 20
+
+# Read the region from the first line of standard input.
+gets stdin region
+if { [eof stdin] || $region eq "" } {
+    puts stderr "Error: Could not read region from stdin or region is empty."
+    exit 1
+}
+
+# Read the email from the second line of standard input.
+gets stdin email
+if { [eof stdin] || $email eq "" } {
+    puts stderr "Error: Could not read email from stdin or email is empty."
+    exit 1
+}
+
+# Spawn the tuya-ipc-terminal command, using the email variable.
+spawn tuya-ipc-terminal auth add $region $email --qr
+
+expect "Press Enter after scanning to continue"
+
+# Send the Enter key
+send "\r"
+
+expect eof
+wait
